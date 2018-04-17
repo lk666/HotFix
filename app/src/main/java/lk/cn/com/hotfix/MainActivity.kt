@@ -9,10 +9,7 @@ import dalvik.system.DexClassLoader
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 
-
-
 class MainActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,13 +26,7 @@ class MainActivity : AppCompatActivity() {
             cl = cl.parent
         }
 
-        File.pathSeparator
-
-
-        tv.text = """错误的信息:1+1=3
-            |
-            |$s
-        """.trimMargin()
+        tv.text = """activity类加载器：$s""".trimMargin()
     }
 
     fun onClick(v: View?) {
@@ -49,12 +40,9 @@ class MainActivity : AppCompatActivity() {
      *  如果获取到了Class，就跳出循环。否则就在下一个Element中寻找Class。
      */
     private fun fix() {
-//        tv.text = "1+1=2"
-        // 加载新的类
-
         // 新dex
         val dex = File(Environment.getExternalStorageDirectory().absolutePath + File
-                .separator + "Download")
+                .separator + "Download" + File.separator + "AddMethod.dex")
 
         // 优化dex存储的目录（odex文件存储目录）
         val dexOptimizeDir = getDir("dex", Context.MODE_PRIVATE)
@@ -64,27 +52,29 @@ class MainActivity : AppCompatActivity() {
 //        optimizedDirectory，指的是odex优化文件存放的路径，可以为null，那么就采用默认的系统路径。
 //        libraryPath，指的是native库文件存放目录，也是以File.pathSeparator分隔。
 //        parent，parent类加载器，先在父加载器中找class，找不到再用自己的加载器
-        File.pathSeparator
         val dexClassLoader = DexClassLoader(dex.absolutePath, optPath, null, classLoader)
 
         var s = ""
         try {
             val clazz = dexClassLoader.loadClass("AddMethod")
-            s +="""loaded class: $clazz
-            | class loader:  + ${clazz.classLoader}
-            | class loader parent:  + ${clazz.classLoader.parent}""".trimMargin()
-
             val constructor = clazz.getConstructor()
             constructor.isAccessible = true
             val o = constructor.newInstance()
-            val print = clazz.getDeclaredMethod("print")
+            val print = clazz.getDeclaredMethod("add", Int::class.java, Int::class.java)
             print.isAccessible = true
-            print.invoke(o)
+            var res = print.invoke(o, 1, 1)
+            s += """loaded class: $clazz
+                |
+            | class loader: ${clazz.classLoader}
+            |
+            | class loader parent: ${clazz.classLoader.parent}
+            |
+            | 运算结果：$res""".trimMargin()
         } catch (e: Exception) {
-            e.printStackTrace()
+            s += e.message
         }
-
+        tv.text = """${tv.text}
+            |================================
+            |$s""".trimMargin()
     }
-
-
 }
