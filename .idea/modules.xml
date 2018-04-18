@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/HotFix.iml" filepath="$PROJECT_DIR$/.idea/HotFix.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HotFix.iml" filepath="$PROJECT_DIR$/HotFix.iml" />
       <module fileurl="file://F:\HotFix\HotFix.iml" filepath="F:\HotFix\HotFix.iml" />
+      <module fileurl="file://C:\Users\lk\Desktop\HotFix\.idea\HotFix.iml" filepath="C:\Users\lk\Desktop\HotFix\.idea\HotFix.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://F:\HotFix\app\app.iml" filepath="F:\HotFix\app\app.iml" />
     </modules>

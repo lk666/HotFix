@@ -9,6 +9,9 @@ import dalvik.system.DexClassLoader
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 
+/**
+ * BootClassLoader是在Zygote进程的入口方法中创建的，PathClassLoader则是在Zygote进程创建SystemServer进程时创建的
+ */
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
