@@ -87,8 +87,8 @@ class AddDexActivity : AppCompatActivity() {
         } catch (e: Exception) {
             s += e.message
         }
-//        tv.text = """${tv.text}
-//            |================================
-//            |$s""".trimMargin()
+        tv.text = """${tv.text}
+            |================================
+            |$s""".trimMargin()
     }
 }
