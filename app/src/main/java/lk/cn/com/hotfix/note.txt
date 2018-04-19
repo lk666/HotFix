@@ -1,7 +1,0 @@
-javac AddMethod.java
-
-C:\Users\lk\AppData\Local\Android\sdk\build-tools\26.0.1\dx.bat --dex --output AddMethod.dex AddMethod.class
-
-注意，AddMethod不能有包名，否则会有错误：
-class name (com/loadclass/demo/Demo) does not match path (Demo.class)
-其次必须有读写文件的权限

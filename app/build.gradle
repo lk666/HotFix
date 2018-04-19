@@ -1,8 +1,9 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+
+//apply tinker插件
+//apply plugin: 'com.tencent.tinker.patch'
 
 android {
     compileSdkVersion 26
@@ -13,6 +14,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -26,4 +29,14 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:26.1.0'
+
+//    //可选，用于生成application类
+//    compileOnly "com.tencent.tinker:tinker-android-anno:1.9.1"
+//    //tinker的核心库
+//    implementation "com.tencent.tinker:tinker-android-lib:1.9.1"
+
+    implementation "com.android.support:recyclerview-v7:26.1.0"
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.28'
+
+    implementation "com.android.support:multidex:1.0.1"
 }

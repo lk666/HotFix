@@ -8,6 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/white</item>
     </style>
-
-    <color name="white">#ffffff</color>
+    <style name="Btn1">
+        <item name="android:background">@drawable/bg_btn</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:textSize">20sp</item>
+    </style>
 </resources>
