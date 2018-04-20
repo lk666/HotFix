@@ -21,6 +21,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddDexActivity"/>
+        <activity android:name=".TinkerActivity"/>
+
+        <service
+            android:name=".service.SampleResultService"
+            android:exported="false"/>
     </application>
 
 </manifest>

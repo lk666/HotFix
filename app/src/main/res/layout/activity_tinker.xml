@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello World!"
+            android:textColor="#333333"
+            android:textSize="16sp"/>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_load_patch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onLoadPatch"
+        android:text="加载patch包"/>
+
+    <!--<Button-->
+        <!--android:id="@+id/btn_load_lib"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:onClick="onLoadLib"-->
+        <!--android:text="加载so包"/>-->
+
+    <Button
+        android:id="@+id/btn_clean_patch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onCleanPatch"
+        android:text="删除patch包"/>
+
+    <Button
+        android:id="@+id/btn_kill"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="kill"
+        android:text="结束程序"/>
+
+
+</LinearLayout>

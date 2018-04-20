@@ -16,12 +16,24 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true
+
+        /**
+         * client version would update with patch
+         * so we can get the newly git version easily!
+         */
+        buildConfigField "String", "TINKER_ID", "\"${getTinkerIdValue()}\""
+        buildConfigField "String", "PLATFORM", "\"all\""
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    //recommend
+    dexOptions {
+        jumboMode = true
     }
 }
 
@@ -30,13 +42,29 @@ dependencies {
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:26.1.0'
 
-//    //可选，用于生成application类
-//    compileOnly "com.tencent.tinker:tinker-android-anno:1.9.1"
-//    //tinker的核心库
-//    implementation "com.tencent.tinker:tinker-android-lib:1.9.1"
+    implementation("com.tencent.tinker:tinker-android-lib:${VER_TINKER}") { changing = true }
+    annotationProcessor("com.tencent.tinker:tinker-android-anno:${VER_TINKER}") { changing = true }
+    compileOnly("com.tencent.tinker:tinker-android-anno:${VER_TINKER}") { changing = true }
 
     implementation "com.android.support:recyclerview-v7:26.1.0"
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.28'
 
     implementation "com.android.support:multidex:1.0.1"
+}
+
+def getTinkerIdValue() {
+    return hasProperty("TINKER_ID") ? TINKER_ID : gitSha()
+}
+
+
+def gitSha() {
+    try {
+        String gitRev = 'git rev-parse --short HEAD'.execute(null, project.rootDir).text.trim()
+        if (gitRev == null) {
+            throw new GradleException("can't get git rev, you should add git to system path or just input test value, such as 'testTinkerId'")
+        }
+        return gitRev
+    } catch (Exception e) {
+        throw new GradleException("can't get git rev, you should add git to system path or just input test value, such as 'testTinkerId'")
+    }
 }
